@@ -1,30 +1,62 @@
 <template>
-    <div>
-        <el-card class="box-card" v-for="(blog, index) in bloglist" :key="index">
-            <div slot="header" class="clearfix">
-                <span>{{ blog.title }}</span>
-                <el-button style="float: right; padding: 3px 0" type="text" @click="showDetail(index)">Detail</el-button>
-            </div>
-            <div class="text item">
-                {{ blog.description }}
-            </div>
-        </el-card>
+    <div class="container">
+        <div class="row">
+            <el-card class="box-card col-md-4 w-100" v-for="(blog, id) in bloglist" :key="id">
+                <div slot="header">
+                    <span>{{ blog.title }}</span>
+                    <small>{{ blog.date }}</small>
+                    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="'/blog/'+blog.id">Detail</router-link>
+                    </el-button>
+                </div>
+                <div class="text item">
+                    {{ blog.description }}
+                </div>
+            </el-card>
+
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: {
-            bloglist: {
-                type: Array
-
+        data() {
+            return {
+                bloglist: [
+                    {
+                        id: '1',
+                        title: 'blog1',
+                        description: 'This is blog1'
+                    },
+                    {
+                        id: '2',
+                        title: 'blog2',
+                        description: 'This is blog2'
+                    },
+                    {
+                        id: '3',
+                        title: 'blog3',
+                        description: 'This is blog3'
+                    },
+                    {
+                        id: '4',
+                        title: 'blog4',
+                        description: 'This is blog3'
+                    }
+                ],
+                blogOne: {}
             }
         },
-        data() {
-            return {}
-        },
-        methods:{
-            showDetail(){
+        methods: {
+            findBlogKey(Id) {
+                for (var key = 0; key < this.bloglist.length; key++) {
+                    if (this.bloglist[key].id == Id) {
+                        return key;
+                    }
+                }
+            },
+            showdetail(id) {
+                this.blogOne = this.bloglist[this.findBlogKey(id)];
+                this.$router.push({name: 'BlogDetail', params: {id: id}});
 
             }
         }
@@ -32,25 +64,5 @@
 </script>
 
 <style>
-    .text {
-        font-size: 14px;
-    }
 
-    .item {
-        margin-bottom: 18px;
-    }
-
-    .clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
-    }
-
-    .clearfix:after {
-        clear: both
-    }
-
-    .box-card {
-        width: 480px;
-    }
 </style>

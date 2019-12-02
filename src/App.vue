@@ -4,18 +4,10 @@
                  text-color="#fff"
                  active-text-color="#ffd04b" class="el-menu-demo" mode="horizontal">
             <el-menu-item index="1">
-                <router-link to="/blogs">Blog Website</router-link>
+                <router-link to="/">Blog Website</router-link>
             </el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">
-                    <router-link to="/blog/id/detail">Blog Detail</router-link>
-                </template>
-                <el-menu-item index="2-1">item one</el-menu-item>
-                <el-menu-item index="2-2">item two</el-menu-item>
-                <el-menu-item index="2-3">item three</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3">Blog list</el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="2"><router-link to="/blogs">Blog list</router-link></el-menu-item>
+            <el-menu-item index="3">
                 <router-link to="/blog/create">Create Blog</router-link>
             </el-menu-item>
         </el-menu>
